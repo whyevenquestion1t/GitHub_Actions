@@ -1,13 +1,23 @@
-name: learn-github-actions
+# you can name the workflow whatever you want, this field is optional 
+name: learn-github-actions 
+
 run-name: ${{ github.actor }} is learning GitHub Actions
+# The name for workflow runs generated from the workflow, which will appear in the list of workflow runs on your repository's "Actions" tab
+
 on: [push]
-jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+# Specifies the trigger for this workflow. This example uses the push event, 
+# so a workflow run is triggered every time someone pushes a change to the repository or merges a pull request.
+
+jobs: # Groups together all the jobs that run in the learn-github-actions workflow.
+  check-bats-version: # Defines a job
+    runs-on: ubuntu-latest # Configures the job to run on the latest version of an Ubuntu Linux runner. 
+                           # This means that the job will execute on a fresh VM hosted by GitHub
+    steps: # Groups together all the steps that run in the check-bats-version job
+      - uses: actions/checkout@v3 
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
       - run: npm install -g bats
       - run: bats -v
+
+# 
